@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>E C Enterprises - Medical Machines & Equipment India</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    color: #333;
+  }
+  a {
+    color: #0b5ed7;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  header {
+    background: #00529b;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+  nav {
+    margin-top: 0.5rem;
+  }
+  nav a {
+    margin-left: 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  nav a:first-child {
+    margin-left: 0;
+  }
+  main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  .hero {
+    background: url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=80') no-repeat center/cover;
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    z-index: 1;
+  }
+  .hero > * {
+    position: relative;
+    z-index: 2;
+  }
+  .hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+  .hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+  .btn {
+    background-color: #0b5ed7;
+    border: none;
+    color: white;
+    padding: 0.75rem 1.6rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: #084298;
+  }
+  /* Section headings */
+  #about h3,
+  #products h3,
+  #reviews h3,
+  #career h3,
+  #doctors h3,
+  #contact h3 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 3px solid #0b5ed7;
+    display: inline-block;
+  }
+  /* About */
+  #about p {
+    max-width: 800px;
+    line-height: 1.6;
+  }
+  /* Products */
+  #products h3 {
+    margin-bottom: 1rem;
+  }
+  .filter-bar {
+    margin-bottom: 1.5rem;
+  }
+  .filter-bar button {
+    background: #e7f1ff;
+    border: 1.5px solid #0b5ed7;
+    color: #0b5ed7;
+    padding: 0.4rem 1rem;
+    margin-right: 0.7rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  .filter-bar button.active,
+  .filter-bar button:hover {
+    background: #0b5ed7;
+    color: white;
+  }
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    outline-offset: 4px;
+  }
+  .product-card:focus {
+    outline: 3px solid #0b5ed7;
+  }
+  .product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    background: #fff;
+  }
+  .product-content {
+    padding: 1rem;
+    flex-grow: 1;
+  }
+  .product-content h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #00529b;
+  }
+  .product-content p {
+    font-size: 0.95rem;
+    margin: 0.4rem 0 1rem 0;
+    color: #555;
+    flex-grow: 1;
+  }
+  /* Customer Reviews */
+  #reviews {
+    background: #eef6ff;
+    padding: 2rem 1rem;
+    border-radius: 8px;
+  }
+  .review-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+  .review-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 7px rgb(0 0 0 / 0.1);
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    outline-offset: 4px;
+  }
+  .review-card:focus {
+    outline: 3px solid #0b5ed7;
+  }
+  .review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+  .reviewer-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid #0b5ed7;
+  }
+  .reviewer-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .stars {
+    color: #f5b301;
+    margin-left: auto;
+    font-size: 1.1rem;
+  }
+  .review-text {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.4;
+  }
+  /* Career Section */
+  #career {
+    background: #f0f7ff;
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+  }
+  #career ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  #career li {
+    background-color: white;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #00529b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #career span.position-count {
+    background: #0b5ed7;
+    color: white;
+    border-radius: 16px;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  /* Doctors Section */
+  #doctors {
+    background: #eef6ff;
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+  }
+  #doctors-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 1.5rem;
+  }
+  .doctor-card {
+    background: white;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 7px rgb(0 0 0 / 0.1);
+    text-align: center;
+    outline-offset: 4px;
+  }
+  .doctor-card:focus {
+    outline: 3px solid #0b5ed7;
+  }
+  .doctor-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.8rem;
+    border: 3px solid #0b5ed7;
+  }
+  .doctor-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: #00529b;
+  }
+  .doctor-position {
+    font-style: italic;
+    color: #555;
+  }
+  /* Contact */
+  #contact form {
+    max-width: 500px;
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px rgb(0 0 0 / 0.1);
+  }
+  #contact form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+  #contact form input,
+  #contact form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 1rem;
+  }
+  #contact form textarea {
+    height: 90px;
+  }
+  #contact form button {
+    background-color: #0b5ed7;
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #contact form button:hover {
+    background-color: #084298;
+  }
+  #contact .contact-info {
+    max-width: 500px;
+    margin: 1rem auto 0 auto;
+    padding: 1rem 2rem;
+    background: #eef6ff;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #00529b;
+  }
+  #contact .contact-info p {
+    margin: 0.3rem 0;
+  }
+  /* Footer */
+  footer {
+    background: #00529b;
+    color: white;
+    text-align: center;
+    padding: 1rem 1rem;
+    font-size: 0.9rem;
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav {
+      margin-top: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+    nav a {
+      display: inline-block;
+      margin: 0.3rem 1rem;
+    }
+    .hero h2 {
+      font-size: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>E C Enterprises</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#products">Products</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#career">Career</a>
+    <a href="#doctors">Doctors</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<main>
+  <section class="hero" aria-label="Introduction hero section">
+    <h2>Your Trusted Partner for Medical Machines & Equipment in India</h2>
+    <p>
+      E C Enterprises provides high-quality medical machines and equipment designed to empower healthcare institutions across India.
+    </p>
+    <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Contact Us</button>
+  </section>
+
+  <section id="about" aria-label="About E C Enterprises">
+    <h3>About Us</h3>
+    <p>
+      E C Enterprises is a leading provider of cutting-edge medical machines and equipment in India. Our mission is to supply hospitals, clinics, and healthcare professionals with the latest innovative technology to improve patient care and outcomes. Established decades ago, we are proud to serve medical facilities nationwide, ensuring quality, reliability, and excellent customer support.
+    </p>
+  </section>
+
+  <section id="products" aria-label="Medical products offered by E C Enterprises">
+    <h3>Our Products</h3>
+    <div class="filter-bar" role="region" aria-label="Product category filters">
+      <button class="active" onclick="filterProducts('all')" aria-pressed="true" id="filter-all">All</button>
+      <button onclick="filterProducts('machines')" aria-pressed="false" id="filter-machines">Medical Machines</button>
+      <button onclick="filterProducts('equipment')" aria-pressed="false" id="filter-equipment">Medical Equipment</button>
+    </div>
+    <div class="product-list" id="product-list" tabindex="0" aria-live="polite" aria-label="List of products">
+      <!-- Product cards inserted here by JS -->
+    </div>
+  </section>
+
+  <section id="reviews" aria-label="Customer reviews of E C Enterprises">
+    <h3>Customer Reviews</h3>
+    <div class="review-list" id="review-list" tabindex="0" aria-live="polite">
+      <!-- Reviews inserted here by JS -->
+    </div>
+  </section>
+
+  <section id="career" aria-label="Career opportunities at E C Enterprises">
+    <h3>Career Opportunities</h3>
+    <ul>
+      <li>
+        Biomedical Engineer
+        <span class="position-count" aria-label="1 position open">4</span>
+      </li>
+      <li>
+        Service Engineer
+        <span class="position-count" aria-label="2 positions open">12</span>
+      </li>
+      <li>
+        Linux Administrator
+        <span class="position-count" aria-label="1 position open">2</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="doctors" aria-label="Indian doctors associated with E C Enterprises">
+    <h3>Our Esteemed Doctors</h3>
+    <div id="doctors-list">
+      <article class="doctor-card" tabindex="0">
+        <img src="https://randomuser.me/api/portraits/men/69.jpg" alt="Dr. Aarav Singh" class="doctor-photo" />
+        <div class="doctor-name">Dr. Aarav Singh</div>
+        <div class="doctor-position">Chief Cardiologist</div>
+      </article>
+      <article class="doctor-card" tabindex="0">
+        <img src="https://randomuser.me/api/portraits/women/15.jpg" alt="Dr. Meera Patel" class="doctor-photo" />
+        <div class="doctor-name">Dr. Meera Patel</div>
+        <div class="doctor-position">Senior Neurologist</div>
+      </article>
+      <article class="doctor-card" tabindex="0">
+        <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Dr. Kavita Desai" class="doctor-photo" />
+        <div class="doctor-name">Dr. Kavita Desai</div>
+        <div class="doctor-position">Oncology Specialist</div>
+      </article>
+      <article class="doctor-card" tabindex="0">
+        <img src="https://randomuser.me/api/portraits/men/87.jpg" alt="Dr. Rajesh Sharma" class="doctor-photo" />
+        <div class="doctor-name">Dr. Rajesh Sharma</div>
+        <div class="doctor-position">Orthopedic Surgeon</div>
+      </article>
+      <article class="doctor-card" tabindex="0">
+        <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="Dr. Sanya Kapoor" class="doctor-photo" />
+        <div class="doctor-name">Dr. Sanya Kapoor</div>
+        <div class="doctor-position">Pediatrician</div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact E C Enterprises">
+    <h3>Contact Us</h3>
+    <form id="contactForm" onsubmit="submitForm(event)" novalidate>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required aria-required="true" />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required aria-required="true" />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10 digit number" />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required aria-required="true"></textarea>
+
+      <button type="submit">Send Message</button>
+      <p role="alert" id="formMessage" aria-live="polite" style="margin-top:0.8rem;"></p>
+    </form>
+    <div class="contact-info" aria-label="Additional contact information">
+      <p><strong>Locations:</strong> <a href="">Lucknow (Head-Office) | Chandigarh | Hyderabad | Mumbai | Ahmedabad | Bangalore | Kochi | Kolkata | Delhi-NCR</a></p>
+      <p><strong>Service Centers:</strong> Lucknow | Delhi-NCR | Hyderabad | Bangalore | Mumbai | Kolkata | Ahmedabad</p>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>&copy; 2024 E C Enterprises. All rights reserved.</p>
+  <p>Serving medical machine and equipment needs throughout India.</p>
+  <p>Email: <a href="mailto:engineerschoiceenterprises@gmail.com" style="color:#bbe1ff;">engineerschoiceenterprises@gmail.com</a></p>
+  <p>GST No.: 09DHHPA1557B1ZR</p>
+</footer>
+<script>
+  // For products, use animated images if we don't have good photos:
+  // The original products mostly have photos; I will remain them, but update 1 product with animated GIF as example.
+
+  const products = [
+    {
+      id: 1,
+      name: "MRI Scanner",
+      category: "machines",
+      description: "Advanced magnetic resonance imaging (MRI) scanner with high resolution and speed.",
+      image: "me.jpg"
+    },
+    {
+      id: 2,
+      name: "Ultrasound Machine",
+      category: "machines",
+      description: "High-quality portable ultrasound machine for precise diagnostics.",
+      image: "me.jpg"
+    },
+    {
+      id: 3,
+      name: "ECG Monitor",
+      category: "machines",
+      description: "Reliable 12-lead ECG monitoring system for cardiac assessments.",
+      image: "me.jpg"
+    },
+    {
+      id: 4,
+      name: "Defibrillator",
+      category: "machines",
+      description: "Portable defibrillator device for emergency cardiac care.",
+      image: "me.jpg"
+    },
+    {
+      id: 5,
+      name: "Ventilator Machine",
+      category: "machines",
+      description: "Advanced life-support ventilator suitable for ICU use.",
+      image: "me.jpg"
+    },
+    {
+      id: 6,
+      name: "X-Ray Machine",
+      category: "machines",
+      description: "High-performance digital X-ray imaging system.",
+      image: "me.jpg"
+    },
+    {
+      id: 7,
+      name: "Surgical Gloves",
+      category: "equipment",
+      description: "Sterile, powder-free surgical gloves for utmost hygiene.",
+      image: "me.jpg"
+    },
+    {
+      id: 8,
+      name: "Medical Face Masks",
+      category: "equipment",
+      description: "Triple-layer disposable face masks for effective protection.",
+      image: "me.jpg"
+    },
+    {
+      id: 9,
+      name: "Stethoscope",
+      category: "equipment",
+      description: "High acoustic sensitivity stethoscope for accurate auscultation.",
+      image: "me.jpg"
+    },
+    {
+      id: 10,
+      name: "Blood Pressure Monitor",
+      category: "equipment",
+      description: "Digital automatic blood pressure monitor with large display.",
+      image: "me.jpg"
+    },
+    {
+      id: 11,
+      name: "Surgical Instruments Set",
+      category: "equipment",
+      description: "Complete set of stainless steel surgical instruments.",
+      image: "me.jpg"
+    },
+    {
+      id: 12,
+      name: "IV Infusion Pump",
+      category: "machines",
+      description: "Accurate and programmable IV infusion pump for fluid management.",
+      image: "me.jpg"
+    }
+  ];
+
+  const productListElem = document.getElementById("product-list");
+  const filterButtons = document.querySelectorAll('.filter-bar button');
+
+  function renderProducts(productsToRender) {
+    productListElem.innerHTML = "";
+    if(productsToRender.length === 0) {
+      productListElem.innerHTML = "<p>No products found in this category.</p>";
+      return;
+    }
+    productsToRender.forEach(prod => {
+      const card = document.createElement("article");
+      card.className = "product-card";
+      card.setAttribute("tabindex", "0");
+      card.innerHTML = `
+        <img src="${prod.image}" alt="${prod.name}" />
+        <div class="product-content">
+          <h4>${prod.name}</h4>
+          <p>${prod.description}</p>
+        </div>
+      `;
+      productListElem.appendChild(card);
+    });
+  }
+
+  function filterProducts(category) {
+    filterButtons.forEach(btn => {
+      const isActive = btn.id === "filter-" + category;
+      btn.classList.toggle("active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+    if (category === "all") {
+      renderProducts(products);
+    } else {
+      renderProducts(products.filter(p => p.category === category));
+    }
+  }
+
+  // Customer reviews data with Indian faces
+  const reviews = [
+    {
+      id: 1,
+      name: "Dr. Anjali Sharma",
+      photo: "https://randomuser.me/api/portraits/lego/3.jpg",
+      rating: 5,
+      text: "E C Enterprises consistently delivers high-quality medical equipment, and their service team is exceptional. Our hospital’s diagnosis accuracy has improved thanks to their machines."
+    },
+    {
+      id: 2,
+      name: "Mr. Rajesh Kumar",
+      photo: "https://randomuser.me/api/portraits/lego/3.jpg",
+      rating: 4,
+      text: "Fast delivery and excellent customer support. The surgical gloves and face masks we bought are top-notch and reliable."
+    },
+    {
+      id: 3,
+      name: "Dr. Neha Verma",
+      photo: "https://randomuser.me/api/portraits/lego/3.jpg",
+      rating: 5,
+      text: "Their medical machines are state-of-the-art and have helped our clinic upgrade diagnostic capabilities greatly. Highly recommended."
+    },
+    {
+      id: 4,
+      name: "Mr. Suresh Patel",
+      photo: "https://randomuser.me/api/portraits/lego/3.jpg",
+      rating: 4,
+      text: "Professional and knowledgeable staff who helped us select the best equipment for our needs."
+    },
+    {
+      id: 5,
+      name: "Dr. Priya Nair",
+      photo: "https://randomuser.me/api/portraits/lego/3.jpg",
+      rating: 5,
+      text: "Great after-sales support and reliable products. We trust E C Enterprises for all our medical equipment needs."
+    }
+  ];
+
+  const reviewListElem = document.getElementById("review-list");
+
+  function renderReviews() {
+    reviewListElem.innerHTML = "";
+    reviews.forEach(review => {
+      const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+      const card = document.createElement("article");
+      card.className = "review-card";
+      card.setAttribute("tabindex", "0");
+      card.innerHTML = `
+        <div class="review-header">
+          <img src="${review.photo}" alt="Photo of ${review.name}" class="reviewer-photo" />
+          <div class="reviewer-name">${review.name}</div>
+          <div class="stars" aria-label="${review.rating} out of 5 stars">${stars}</div>
+        </div>
+        <p class="review-text">${review.text}</p>
+      `;
+      reviewListElem.appendChild(card);
+    });
+  }
+
+  function submitForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const message = form.message.value.trim();
+    const formMsg = document.getElementById("formMessage");
+    formMsg.style.color = "red";
+
+    if (!name || !email || !message) {
+      formMsg.textContent = "Please fill in all required fields.";
+      return;
+    }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      formMsg.textContent = "Please enter a valid email address.";
+      return;
+    }
+    if (phone && !/^\d{10}$/.test(phone)) {
+      formMsg.textContent = "Phone number must be 10 digits.";
+      return;
+    }
+    // Simulate form submit success
+    formMsg.style.color = "green";
+    formMsg.textContent = "Thank you for contacting us, " + name + "! We will get back to you shortly.";
+    form.reset();
+  }
+
+  // Initial render
+  filterProducts('all');
+  renderReviews();
+</script>
+</body>
+</html>
